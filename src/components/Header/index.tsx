@@ -9,7 +9,6 @@ export function Header() {
     <Container>
       <Content>
         <img src={logoImg} alt="Support DRR" />
-        <h1>SuportesDRR Tataui 2022</h1>
         <button type="button" onClick={() => window.location.reload()}>Obter + Suportes</button>
       </Content>
     </Container>
