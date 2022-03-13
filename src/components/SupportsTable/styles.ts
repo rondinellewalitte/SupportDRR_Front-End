@@ -7,6 +7,7 @@ export const Container = styled.div`
 
  table{
    width: 100%;
+   table-layout: fixed;
    border-spacing: 0 0.5rem;
 
    th { 
@@ -24,6 +25,8 @@ export const Container = styled.div`
      font-weight: 400;
      color: var(--text-body);
      border-radius: 0.25rem;
+     word-wrap: break-word;
+     
 
     &:first-child{
       color: var(--text-title);
