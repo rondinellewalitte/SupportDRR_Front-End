@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { darken } from 'polished'
+
 
 export const Container = styled.div`
  margin-top: 4rem;
@@ -27,12 +29,45 @@ export const Container = styled.div`
       color: var(--text-title);
     }
 
-    &.open{
+    &.status_1{
       color: var(--red);
     }
 
-    &.close{
+    &.status_2{
       color: var(--green);
+    }
+
+    button {
+      padding: 1rem 2rem ;
+      height: 4rem;
+      border: 1px solid #d7d7d7;
+      border-radius: 0.25rem;
+
+      background: transparent;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition: border-color 0.2s;
+
+      &:hover {
+        border-color: ${darken(0.1, '#d7d7d7')};
+      }
+
+      img {
+      width:20px;
+      height:20px;
+      margin-left: 1rem;
+      }
+
+      span{
+        display: inline-block;
+        margin-left: 1rem;
+        font-size: 1rem;
+        color: var(--text-title)
+
+      }
     }
 
    }
