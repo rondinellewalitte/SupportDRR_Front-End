@@ -38,9 +38,10 @@ export function SupportsProvider({ children }: SupportsProviderProps) {
 
   async function closeSupport(support: SupportClose) {
     const { id, id_response } = support;
+    console.log(id_response);
     const res = await api.get("/supports/finish", {
       headers: {
-        id_response
+        idresponse: id_response
       },
     })
 
