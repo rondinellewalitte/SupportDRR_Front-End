@@ -1,38 +1,23 @@
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
+
 import { decode } from 'html-entities';
 
 import closeimg from "../../assets/close.svg"
 
 import { Container } from "./styles";
-
-interface Support {
-  id: number;
-  name: string;
-  course: string;
-  classroom: string;
-  date_support: string;
-  status: string;
-  id_response: string;
-  id_user: string;
-  support: string;
-}
-interface IdResponse {
-  id_response: string;
-}
+import { useSupports } from "../../hooks/useSupports";
 
 export function SupportsTable() {
 
-  const [supports, setSupports] = useState<Support[]>([]);
+  const { supports, closeSupport } = useSupports();
 
-  function handleEndSupport(id_response: string) {
-    console.log(id_response);
+  async function handleEndSupport(id_response: string, id: number) {
+    await closeSupport({ id_response, id });
   }
 
-  useEffect(() => {
-    api.get('/supports')
-      .then(response => setSupports(response.data));
-  }, [])
+
+  const result = supports.filter((dados) => {
+    return dados.status === "1";
+  });
 
   return (
     <Container>
@@ -47,14 +32,14 @@ export function SupportsTable() {
         </thead>
 
         <tbody>
-          {supports.map(support => {
+          {result.map(support => {
             return (
               <tr key={support.id}>
                 <td>{support.name}</td>
                 <td>{support.course}</td>
                 <td>{decode(decode(support.support)).replace(/(<([^>]+)>)/ig, '')}</td>
                 <td className={"status_" + support.status}>
-                  <button onClick={() => handleEndSupport(support.id_response)} type="button">
+                  <button onClick={() => handleEndSupport(support.id_response, support.id)} type="button">
                     <span>Fechar</span>
                     <img src={closeimg} alt="Fechar" />
                   </button>
